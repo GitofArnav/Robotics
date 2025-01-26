@@ -1,0 +1,59 @@
+ int trigPin = 10;
+ int echoPin = 11;
+ int segA = 1;
+ int segB = 2;
+ int segC = 3;
+ int segD = 4;
+ int segE = 5;
+ int segF = 6;
+ int segG = 7;
+
+long duration;
+long distance;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(segA,OUTPUT);
+  pinMode(segB,OUTPUT);
+  pinMode(segC,OUTPUT);
+  pinMode(segD,OUTPUT);
+  pinMode(segE,OUTPUT);
+  pinMode(segF,OUTPUT);
+  pinMode(segG,OUTPUT);
+  Serial.begin(9600);
+  
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(20);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+  Serial.println(distance);
+  delay(250);
+
+  if(distance < 10){
+    digitalWrite(segA,HIGH);
+    digitalWrite(segB,HIGH);
+    digitalWrite(segC,HIGH);
+    digitalWrite(segD,HIGH);
+    digitalWrite(segE,HIGH);
+    digitalWrite(segF,HIGH);
+    digitalWrite(segG,HIGH);
+  }
+  if(distance > 10){
+    digitalWrite(segA,HIGH);
+    digitalWrite(segB,LOW);
+    digitalWrite(segC,LOW);
+    digitalWrite(segD,LOW);
+    digitalWrite(segE,LOW);
+    digitalWrite(segF,LOW);
+    digitalWrite(segG,LOW);
+
+  }
+}
